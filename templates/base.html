@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{% block title %}Pneumonia Detection - AI Medical Diagnosis{% endblock %}</title>
+    <meta name="description" content="AI-powered pneumonia detection from chest X-ray images. Upload your X-ray for instant analysis." />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="theme-color" content="#667eea" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="{{ url_for('static',filename='main.css') }}" as="style" />
+    <link rel="preload" href="{{ url_for('static',filename='main.js') }}" as="script" />
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🫁</text></svg>" />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Pneumonia Detection - AI Medical Diagnosis" />
+    <meta property="og:description" content="AI-powered pneumonia detection from chest X-ray images" />
+    <meta property="og:url" content="{{ request.url }}" />
+    
+    <!-- Security headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:;" />
+    
+    <!-- Navigation Styles -->
+    <style>
+      .navbar {
+        background: #667eea;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .nav-logo {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      
+      .nav-logo:hover {
+        text-decoration: none;
+        color: #f0f0f0;
+      }
+      
+      .nav-user {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .user-info {
+        color: white;
+        font-size: 0.9rem;
+      }
+      
+      .logout-btn {
+        background: rgba(255,255,255,0.2);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: background 0.2s ease;
+      }
+      
+      .logout-btn:hover {
+        background: rgba(255,255,255,0.3);
+        text-decoration: none;
+        color: white;
+      }
+      
+      @media (max-width: 768px) {
+        .nav-container {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        
+        .user-info {
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    {% if current_user.is_authenticated %}
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <a href="{{ url_for('index') }}" class="nav-logo">🫁 Pneumonia Detection</a>
+        </div>
+        <div class="nav-user">
+          <span class="user-info">
+            {% if current_user.username %}
+              Hello, {{ current_user.username }}
+            {% elif current_user.name %}
+              Hello, {{ current_user.name }}
+            {% else %}
+              Hello, User
+            {% endif %}
+          </span>
+          <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+      </div>
+    </nav>
+    {% endif %}
+
+    <main role="main" aria-label="Pneumonia Detection Application">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static',filename='main.js') }}" defer></script>
+    
+    <!-- Accessibility: Skip to main content link -->
+    <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
+  </body>
+</html>

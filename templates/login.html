@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Pneumonia Detection{% endblock %}
+
+{% block content %}
+<div class="main" id="main-content">
+  <header class="title">
+    <h1>🫁 Pneumonia Detection</h1>
+    <p>
+      <small>Secure access to AI-powered medical analysis</small>
+    </p>
+  </header>
+
+  <section class="login-panel" aria-labelledby="login-section">
+    <div class="login-container">
+      <h2 id="login-section">Sign In</h2>
+      <p class="login-description">
+        Please sign in to access the pneumonia detection system
+      </p>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, message in messages %}
+              <div class="flash-message flash-{{ category }}" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <!-- Username/Password Login Form -->
+      <form method="POST" action="{{ url_for('login') }}" class="login-form">
+        {{ form.hidden_tag() }}
+        
+        <div class="form-group">
+          {{ form.username.label(class="form-label") }}
+          {{ form.username(class="form-input") }}
+          {% if form.username.errors %}
+            <div class="form-errors">
+              {% for error in form.username.errors %}
+                <span class="error-message">{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          {{ form.password.label(class="form-label") }}
+          {{ form.password(class="form-input") }}
+          {% if form.password.errors %}
+            <div class="form-errors">
+              {% for error in form.password.errors %}
+                <span class="error-message">{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="login-btn">
+            Sign In
+          </button>
+        </div>
+      </form>
+
+      <div class="login-divider">
+        <span>or</span>
+      </div>
+
+      <!-- Google OAuth Login -->
+      <div class="login-options">
+        <a href="{{ url_for('google_login') }}" class="google-login-btn" role="button">
+          <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          Continue with Google
+        </a>
+      </div>
+
+      <div class="register-link">
+        <p>Don't have an account? <a href="{{ url_for('register') }}">Sign up here</a></p>
+        <p><a href="{{ url_for('welcome') }}">← Back to Welcome</a></p>
+      </div>
+
+      <div class="login-footer">
+        <p class="disclaimer">
+          <small>
+            <strong>Privacy Notice:</strong> We use Google OAuth for secure authentication. 
+            Your medical data is protected and never shared with third parties.
+          </small>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="app-footer">
+    <p class="disclaimer">
+      <strong>Medical Disclaimer:</strong> This tool is for educational purposes only. 
+      Always consult with qualified healthcare professionals for medical diagnosis and treatment.
+    </p>
+  </footer>
+</div>
+
+<style>
+.login-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 2rem 1rem;
+}
+
+.login-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 3rem 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-container h2 {
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.login-description {
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.flash-messages {
+  margin-bottom: 1.5rem;
+}
+
+.flash-message {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.flash-error {
+  background-color: #fee;
+  color: #c33;
+  border: 1px solid #fcc;
+}
+
+.flash-success {
+  background-color: #efe;
+  color: #363;
+  border: 1px solid #cfc;
+}
+
+.flash-info {
+  background-color: #eef;
+  color: #336;
+  border: 1px solid #ccf;
+}
+
+.google-login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: white;
+  border: 2px solid #dadce0;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  color: #3c4043;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 280px;
+}
+
+.google-login-btn:hover {
+  background: #f8f9fa;
+  border-color: #c1c7cd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: #3c4043;
+}
+
+.google-login-btn:focus {
+  outline: 2px solid #4285f4;
+  outline-offset: 2px;
+}
+
+.google-icon {
+  flex-shrink: 0;
+}
+
+.login-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.login-footer .disclaimer {
+  color: #666;
+  line-height: 1.4;
+}
+
+/* Form Styles */
+.login-form {
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e1e5e9;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.form-errors {
+  margin-top: 0.25rem;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.8rem;
+  display: block;
+}
+
+.login-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+}
+
+.login-divider {
+  margin: 1.5rem 0;
+  text-align: center;
+  position: relative;
+}
+
+.login-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e1e5e9;
+}
+
+.login-divider span {
+  background: white;
+  padding: 0 1rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.register-link {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.register-link p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.register-link a {
+  color: #4285f4;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+  
+  .google-login-btn {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.2rem;
+  }
+  
+  .form-input {
+    font-size: 0.9rem;
+  }
+  
+  .login-btn {
+    font-size: 0.9rem;
+  }
+}
+</style>
+{% endblock %}

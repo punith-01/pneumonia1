@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Flask App",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/app.py",
+            "args": [],
+            "jinja": true,
+            "env": {
+                "FLASK_ENV": "development"
+            }
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against Flask App",
+            "url": "http://127.0.0.1:5002",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}

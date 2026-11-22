@@ -1,0 +1,64 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+
+# Environment variables & secrets
+.env
+!.env.example
+
+# Local databases
+*.db
+*.sqlite3
+local_users.db
+
+# User uploads (keep directory with .gitkeep)
+uploads/*
+!uploads/.gitkeep
+
+# macOS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows thumbnail caches
+Thumbs.db
+ehthumbs.db
+
+# VS Code (keep shared configurations)
+.vscode/*
+!.vscode/launch.json
+
+# Large datasets (referenced in README from Kaggle)
+datset/
+dataset/
+*.zip
+*.tar.gz

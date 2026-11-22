@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Pneumonia Detection{% endblock %}
+
+{% block content %}
+<div class="main" id="main-content">
+  <header class="title">
+    <h1>🫁 Pneumonia Detection</h1>
+    <p>
+      <small>Create your account for AI-powered medical analysis</small>
+    </p>
+  </header>
+
+  <section class="login-panel" aria-labelledby="register-section">
+    <div class="login-container">
+      <h2 id="register-section">Create Account</h2>
+      <p class="login-description">
+        Sign up to access the pneumonia detection system
+      </p>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, message in messages %}
+              <div class="flash-message flash-{{ category }}" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <!-- Registration Form -->
+      <form method="POST" action="{{ url_for('register') }}" class="login-form" novalidate>
+        {{ form.hidden_tag() }}
+        
+        <div class="form-group">
+          {{ form.username.label(class="form-label") }}
+          {{ form.username(class="form-input") }}
+          {% if form.username.errors %}
+            <div class="form-errors">
+              {% for error in form.username.errors %}
+                <span class="error-message">{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          {{ form.email.label(class="form-label") }}
+          {{ form.email(class="form-input") }}
+          {% if form.email.errors %}
+            <div class="form-errors">
+              {% for error in form.email.errors %}
+                <span class="error-message">{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          {{ form.password.label(class="form-label") }}
+          {{ form.password(class="form-input") }}
+          {% if form.password.errors %}
+            <div class="form-errors">
+              {% for error in form.password.errors %}
+                <span class="error-message">{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          {{ form.confirm_password.label(class="form-label") }}
+          {{ form.confirm_password(class="form-input") }}
+          {% if form.confirm_password.errors %}
+            <div class="form-errors">
+              {% for error in form.confirm_password.errors %}
+                <span class="error-message">{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="login-btn">
+            Create Account
+          </button>
+        </div>
+      </form>
+
+      <div class="register-link">
+        <p>Already have an account? <a href="{{ url_for('login') }}">Sign in here</a></p>
+        <p><a href="{{ url_for('welcome') }}">← Back to Welcome</a></p>
+      </div>
+
+      <div class="login-footer">
+        <p class="disclaimer">
+          <small>
+            <strong>Privacy Notice:</strong> Your account information is securely stored and encrypted. 
+            Your medical data is protected and never shared with third parties.
+          </small>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="app-footer">
+    <p class="disclaimer">
+      <strong>Medical Disclaimer:</strong> This tool is for educational purposes only. 
+      Always consult with qualified healthcare professionals for medical diagnosis and treatment.
+    </p>
+  </footer>
+</div>
+
+<style>
+.login-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 2rem 1rem;
+}
+
+.login-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 3rem 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-container h2 {
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.login-description {
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.flash-messages {
+  margin-bottom: 1.5rem;
+}
+
+.flash-message {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.flash-error {
+  background-color: #fee;
+  color: #c33;
+  border: 1px solid #fcc;
+}
+
+.flash-success {
+  background-color: #efe;
+  color: #363;
+  border: 1px solid #cfc;
+}
+
+.flash-info {
+  background-color: #eef;
+  color: #336;
+  border: 1px solid #ccf;
+}
+
+/* Form Styles */
+.login-form {
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e1e5e9;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.form-errors {
+  margin-top: 0.25rem;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.8rem;
+  display: block;
+}
+
+.login-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+}
+
+.register-link {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.register-link p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.register-link a {
+  color: #4285f4;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+.login-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.login-footer .disclaimer {
+  color: #666;
+  line-height: 1.4;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+  
+  .form-input {
+    font-size: 0.9rem;
+  }
+  
+  .login-btn {
+    font-size: 0.9rem;
+  }
+}
+</style>
+{% endblock %}

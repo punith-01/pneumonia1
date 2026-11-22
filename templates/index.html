@@ -1,0 +1,101 @@
+{% extends "base.html" %} 
+
+{% block title %}Pneumonia Detection - Upload X-Ray for AI Analysis{% endblock %}
+
+{% block content %}
+
+<div class="main" id="main-content">
+  <header class="title">
+    <h1>Pneumonia Detection</h1>
+    <p>
+      <small>AI-powered analysis of chest X-ray images</small>
+    </p>
+  </header>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for category, message in messages %}
+          <div class="flash-message flash-{{ category }}" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <section class="panel" aria-labelledby="upload-section">
+    <h2 id="upload-section" class="sr-only">Upload X-Ray Image</h2>
+    <input 
+      id="file-upload" 
+      class="hidden" 
+      type="file" 
+      accept="image/png,image/gif,image/jpeg,image/jpg" 
+      aria-describedby="upload-instructions"
+    />
+    <label 
+      for="file-upload" 
+      id="file-drag" 
+      class="upload-box"
+      tabindex="0"
+      role="button"
+      aria-describedby="upload-instructions"
+    >
+      <div id="upload-caption">Drop image here or click to select</div>
+      <img id="image-preview" class="hidden" alt="Preview of uploaded X-ray image" />
+    </label>
+    <div id="upload-instructions" class="sr-only">
+      Upload a chest X-ray image in PNG, JPG, or GIF format. Maximum file size is 10MB.
+    </div>
+  </section>
+  
+  <section class="controls" aria-labelledby="controls-section">
+    <h2 id="controls-section" class="sr-only">Analysis Controls</h2>
+    <div style="margin-bottom: 2rem;">
+      <button 
+        type="button" 
+        class="button" 
+        id="submit-btn"
+        aria-describedby="submit-help"
+      >
+        Submit
+      </button>
+      <button 
+        type="button" 
+        class="button" 
+        id="clear-btn"
+        aria-describedby="clear-help"
+      >
+        Clear
+      </button>
+    </div>
+    <div id="submit-help" class="sr-only">Submit the uploaded image for pneumonia analysis</div>
+    <div id="clear-help" class="sr-only">Clear the current image and start over</div>
+  </section>
+
+  <section id="image-box" aria-labelledby="results-section" aria-live="polite">
+    <h2 id="results-section" class="sr-only">Analysis Results</h2>
+    <img id="image-display" alt="Analyzed X-ray image" style="display: none;" />
+    <div id="pred-result" class="hidden" role="status" aria-live="assertive"></div>
+    <svg 
+      id="loader" 
+      class="hidden" 
+      viewBox="0 0 32 32" 
+      width="32" 
+      height="32"
+      aria-label="Processing image, please wait"
+      role="img"
+    >
+      <circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
+    </svg>
+  </section>
+
+  <footer class="app-footer">
+    <p class="disclaimer">
+      <strong>Medical Disclaimer:</strong> This tool is for educational purposes only. 
+      Always consult with qualified healthcare professionals for medical diagnosis and treatment.
+    </p>
+  </footer>
+</div>
+
+{% endblock %}

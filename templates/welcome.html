@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - Pneumonia Detection{% endblock %}
+
+{% block content %}
+<div class="main" id="main-content">
+  <header class="welcome-header">
+    <div class="welcome-container">
+      <div class="welcome-content">
+        <div class="logo-section">
+          <h1 class="welcome-title">🫁 Pneumonia Detection</h1>
+          <p class="welcome-subtitle">AI-Powered Medical Diagnosis System</p>
+        </div>
+
+        <div class="features-section">
+          <div class="feature-grid">
+            <div class="feature-item">
+              <div class="feature-icon">🔬</div>
+              <h3>AI Analysis</h3>
+              <p>Advanced machine learning algorithms analyze chest X-ray images for pneumonia detection</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">⚡</div>
+              <h3>Fast Results</h3>
+              <p>Get instant analysis results within seconds of uploading your X-ray image</p>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">🔒</div>
+              <h3>Secure & Private</h3>
+              <p>Your medical data is encrypted and protected with industry-standard security</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-section">
+          <h2>Get Started</h2>
+          <p class="cta-description">Create an account to access our AI-powered pneumonia detection system</p>
+
+          <div class="auth-buttons">
+            <a href="{{ url_for('register') }}" class="btn btn-primary">
+              Create Account
+            </a>
+            <a href="{{ url_for('login') }}" class="btn btn-secondary">
+              Already have an account? Sign In
+            </a>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary" style="margin-top: 0.5rem; text-align: center;">
+              Continue as Guest (Demo Mode)
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <footer class="welcome-footer">
+    <div class="disclaimer-section">
+      <p class="disclaimer">
+        <strong>Medical Disclaimer:</strong> This tool is for educational and research purposes only.
+        Always consult with qualified healthcare professionals for medical diagnosis and treatment.
+        This AI system should not be used as a substitute for professional medical advice.
+      </p>
+    </div>
+  </footer>
+</div>
+
+<style>
+  .welcome-header {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .welcome-container {
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .welcome-content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .logo-section {
+    margin-bottom: 3rem;
+  }
+
+  .welcome-title {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .welcome-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 0;
+  }
+
+  .features-section {
+    margin-bottom: 3rem;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .feature-item {
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: #f8f9fa;
+    transition: transform 0.2s ease;
+  }
+
+  .feature-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-item h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .feature-item p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .cta-section h2 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+  }
+
+  .cta-description {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    text-decoration: none;
+    color: white;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #667eea;
+    border-color: #667eea;
+  }
+
+  .btn-secondary:hover {
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+  }
+
+  .welcome-footer {
+    background: #f8f9fa;
+    padding: 2rem 1rem;
+  }
+
+  .disclaimer-section {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .disclaimer {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .welcome-title {
+      font-size: 2.2rem;
+    }
+
+    .welcome-content {
+      padding: 2rem 1.5rem;
+    }
+
+    .feature-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .auth-buttons {
+      max-width: 100%;
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .welcome-header {
+      padding: 1rem 0.5rem;
+    }
+
+    .welcome-content {
+      padding: 1.5rem 1rem;
+    }
+
+    .welcome-title {
+      font-size: 1.8rem;
+    }
+
+    .welcome-subtitle {
+      font-size: 1rem;
+    }
+  }
+</style>
+{% endblock %}

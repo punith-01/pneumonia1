@@ -1,0 +1,24 @@
+Flask>=1.0.0
+numpy>=1.24.0
+gevent>=1.5.0
+pillow>=6.2.0
+h5py>=3.0.0
+# Note: TensorFlow doesn't support Python 3.14 yet. 
+# Use Python 3.11 or 3.12 for TensorFlow support, or install tensorflow-nightly
+# tensorflow>=2.15.0
+gunicorn>=19.5.0
+
+# Authentication dependencies
+Flask-Login>=0.6.0
+Authlib>=1.2.0
+requests>=2.28.0
+python-dotenv>=1.0.0
+Werkzeug>=2.0.0
+Flask-WTF>=1.1.0
+WTForms>=3.0.0
+email-validator>=1.0.0
+
+# Database dependencies
+pymongo>=4.0.0
+certifi>=2021.0.0
+
